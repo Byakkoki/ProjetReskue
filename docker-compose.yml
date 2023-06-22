@@ -1,0 +1,33 @@
+version: "3.3"  # optional since v1.27.0
+
+services:
+  postgres:
+    container_name: sandbox_postgres
+    image: postgres:latest
+    restart: always
+    networks:
+      - eventnet
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  pgadmin:
+    links:
+      - postgres:postgres
+    container_name: sandbox_pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin:/root/.pgadmin
+    env_file:
+      - .env
+    networks:
+      - eventnet
+networks:
+  eventnet:
+volumes:
+  pgdata:
+  pgadmin:
