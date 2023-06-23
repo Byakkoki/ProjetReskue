@@ -1,33 +1,33 @@
-version: "3.3"  # optional since v1.27.0
-
+version: "3"
 services:
   postgres:
-    container_name: sandbox_postgres
+    container_name: nestjs-postgres
     image: postgres:latest
-    restart: always
-    networks:
-      - eventnet
-    environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    env_file:
+      - docker.env
+    networks:
+      - postgres
+ 
   pgadmin:
     links:
       - postgres:postgres
-    container_name: sandbox_pgadmin
+    container_name: nestjs-pgadmin
     image: dpage/pgadmin4
     ports:
       - "8080:80"
     volumes:
       - pgadmin:/root/.pgadmin
     env_file:
-      - .env
+      - docker.env
     networks:
-      - eventnet
+      - postgres
 networks:
-  eventnet:
+  postgres:
+    driver: bridge
 volumes:
   pgdata:
   pgadmin:
