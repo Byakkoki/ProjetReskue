@@ -12,7 +12,7 @@ export class EventEntity {
     name: string
 
     @Property()
-    start_date: Date
+    start_date: string
 
     @Property()
     place: string
