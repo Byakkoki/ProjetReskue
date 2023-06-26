@@ -17,7 +17,7 @@ export class EventEntity {
     @Property()
     place: string
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, { cascade: [Cascade.ALL] })
     owner: User
 
     @OneToMany(() => TicketEntity, ticket => ticket.event, { cascade: [Cascade.ALL] })

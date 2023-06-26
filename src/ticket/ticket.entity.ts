@@ -1,4 +1,4 @@
-import {Entity, ManyToOne, PrimaryKey} from "@mikro-orm/core";
+import {Cascade, Entity, ManyToOne, PrimaryKey} from "@mikro-orm/core";
 import {User} from "../user/user.entity";
 import {EventEntity} from "../event/event.entity";
 
@@ -7,9 +7,9 @@ export class TicketEntity {
     @PrimaryKey()
     id: string
 
-    @ManyToOne(() => User, { nullable: true })
+    @ManyToOne(() => User, { nullable: true, cascade: [Cascade.ALL] })
     owner: User
 
-    @ManyToOne(() => EventEntity)
+    @ManyToOne(() => EventEntity, { cascade: [ Cascade.ALL] })
     event: EventEntity
 }

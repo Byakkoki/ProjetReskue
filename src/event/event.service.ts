@@ -105,6 +105,12 @@ export class EventService {
 
     async deleteOneEvent(idEvent: string, user: User) {
         const eventDelete = await this.findOneEventWithOwner(idEvent, user)
+        const tickets = await this.ticketEntity.find({
+            event: eventDelete
+        })
+        tickets.forEach(async (ticket) => {
+            await this.entityManager.removeAndFlush(ticket)
+        })
         return this.entityManager.removeAndFlush(eventDelete)
     }
 }

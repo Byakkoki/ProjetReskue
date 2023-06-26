@@ -12,7 +12,6 @@ async function bootstrap() {
     }),
   );
 
-  // SWAGGER
   const swaggerConfig = new DocumentBuilder()
     .setTitle('ProjectReskue')
     .setDescription('API For a Project')

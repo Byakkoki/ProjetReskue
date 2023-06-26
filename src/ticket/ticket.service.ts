@@ -12,6 +12,7 @@ import {EventEntity} from "../event/event.entity";
 import {User} from "../user/user.entity";
 import e from "express";
 import * as moment from "moment";
+import { RoleEnum } from "src/commons/enum/role.enum";
 
 @Injectable()
 export class TicketService {
@@ -23,6 +24,29 @@ export class TicketService {
         private eventRepository: EntityRepository<EventEntity>,
         private entityManager: EntityManager
     ) { }
+
+    async getAllTickets(user: User) {
+        if(!user.roles.includes(RoleEnum.ADMIN)) {
+            throw new ForbiddenException("You don't have access to this")
+        }
+
+        return this.ticketRepository.findAll()
+    }
+
+    async findOneTicketWithOwner(idTicket: string, idEvent: string, user: User) {
+        const event = await this.getOneEvent(idEvent)
+        const ticket = await this.ticketRepository.findOne({
+            id: idTicket,
+            event: event,
+            owner: user
+        })
+
+        if(!ticket) {
+            throw new NotFoundException('Ticket not found')
+        }
+
+        return ticket
+    }
 
     async getOneEvent(idEvent: string) {
         const event = await this.eventRepository.findOne({

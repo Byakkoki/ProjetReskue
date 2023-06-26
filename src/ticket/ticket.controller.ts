@@ -12,6 +12,12 @@ export class TicketController {
         private ticketService: TicketService
     ) { }
 
+    @UseGuards(AuthenticatedGuard)
+    @Get()
+    getAllTickets(@Req() request: RequestWithUser) {
+        return this.ticketService.getAllTickets(request.user)
+    }
+
     @Get('available')
     getAllTicketAvailableByOneEvent(@Param('idEvent') idEvent: string) {
         return this.ticketService.getAllTicketAvailableByOneEvent(idEvent)
