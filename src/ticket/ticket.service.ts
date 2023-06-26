@@ -11,6 +11,7 @@ import {EntityManager, EntityRepository} from "@mikro-orm/postgresql";
 import {EventEntity} from "../event/event.entity";
 import {User} from "../user/user.entity";
 import e from "express";
+import * as moment from "moment";
 
 @Injectable()
 export class TicketService {
@@ -59,8 +60,14 @@ export class TicketService {
     }
 
     async bookOneTicket(idEvent: string, user: User) {
+        const dateNow = moment()
         let ticketSend: TicketEntity = null
+
         const event = await this.getOneEvent(idEvent)
+
+        if(moment(dateNow).isAfter(moment(event.start_date))) {
+            throw new BadRequestException('You can\'t book this ticket because the start date event has passed')
+        }
 
         if(event.owner == user) {
             throw new ForbiddenException('You can book a ticket from your event')
