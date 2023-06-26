@@ -4,7 +4,9 @@ import RequestWithUser from "../commons/request.user";
 import { EventService } from "./event.service";
 import {CreateEventDTO} from "./dto/createEvent.dto";
 import {UpdateEventDTO} from "./dto/updateEvent.dto";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Event')
 @Controller('event')
 export class EventController {
 

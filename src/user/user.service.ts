@@ -1,7 +1,7 @@
 import { wrap } from "@mikro-orm/core";
 import { InjectRepository } from "@mikro-orm/nestjs";
 import { EntityManager, EntityRepository } from "@mikro-orm/postgresql";
-import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from "@nestjs/common";
 import { RoleEnum } from "../commons/enum/role.enum";
 import { v4 } from "uuid";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
@@ -52,7 +52,7 @@ export class UserService {
             return userUpdate;
         } else {
             if(user != userUpdate) {
-                throw new BadRequestException('You are not the user want to be deleted')
+                throw new ForbiddenException("You can't make that !")
             }
             wrap(userUpdate).assign(data)
             await this.entityManager.persistAndFlush(userUpdate);
@@ -66,7 +66,7 @@ export class UserService {
             return this.entityManager.removeAndFlush(userDelete)
         } else {
             if(user != userDelete) {
-                throw new BadRequestException('You are not the user want to be deleted')
+                throw new ForbiddenException("You can't make that !")
             }
             return this.entityManager.removeAndFlush(userDelete)
         }

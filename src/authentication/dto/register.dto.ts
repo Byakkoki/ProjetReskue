@@ -15,6 +15,6 @@ export class RegisterDTO {
     @IsNotEmpty()
     password: string
     @IsArray()
-    @IsOptional()
+    @IsNotEmpty()
     roles: RoleEnum[]
 }

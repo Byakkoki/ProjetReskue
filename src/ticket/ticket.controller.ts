@@ -2,7 +2,9 @@ import {Controller, Get, Param, Post, Put, Req, UseGuards} from "@nestjs/common"
 import {TicketService} from "./ticket.service";
 import {AuthenticatedGuard} from "../commons/security/guard/authenticated.guard";
 import RequestWithUser from "../commons/request.user";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Ticket')
 @Controller('ticket/event/:idEvent')
 export class TicketController {
 

@@ -4,7 +4,9 @@ import { AuthenticatedGuard } from "../commons/security/guard/authenticated.guar
 import { AuthenticationService } from "./authentication.service";
 import { LoginDTO } from "./dto/login.dto";
 import { RegisterDTO } from "./dto/register.dto";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Authentication')
 @Controller('authentication')
 export class AuthenticationController {
 

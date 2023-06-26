@@ -3,7 +3,9 @@ import RequestWithUser from "../commons/request.user";
 import { AuthenticatedGuard } from "../commons/security/guard/authenticated.guard";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { UserService } from "./user.service";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
 
