@@ -1,7 +1,7 @@
 import { InjectRepository } from "@mikro-orm/nestjs";
 import { EntityManager, EntityRepository } from "@mikro-orm/postgresql";
 import { BadRequestException, ConflictException, Injectable, Logger, NotFoundException } from "@nestjs/common";
-import { User } from "src/user/user.entity";
+import { User } from "../user/user.entity";
 import { RegisterDTO } from "./dto/register.dto";
 import * as bcrypt from 'bcrypt';
 import { v4 } from "uuid";

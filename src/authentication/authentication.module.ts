@@ -3,9 +3,9 @@ import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
-import { AuthenticatedStrategy } from "src/commons/security/strategy/authenticated.strategy";
-import { User } from "src/user/user.entity";
-import { UserService } from "src/user/user.service";
+import { AuthenticatedStrategy } from "../commons/security/strategy/authenticated.strategy";
+import { User } from "../user/user.entity";
+import { UserService } from "../user/user.service";
 import { AuthenticationController } from "./authentication.controller";
 import { AuthenticationService } from "./authentication.service";
 
@@ -27,6 +27,6 @@ import { AuthenticationService } from "./authentication.service";
     ],
     controllers: [AuthenticationController],
     providers: [AuthenticationService, AuthenticatedStrategy, UserService],
-    exports: [AuthenticationService]
+    exports: [AuthenticationService, UserService]
 })
 export class AuthenticationModule { }

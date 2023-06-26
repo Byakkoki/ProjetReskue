@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Logger, Post, Req, UseGuards } from "@nestjs/common";
-import RequestWithUser from "src/commons/request.user";
-import { AuthenticatedGuard } from "src/commons/security/guard/authenticated.guard";
+import RequestWithUser from "../commons/request.user";
+import { AuthenticatedGuard } from "../commons/security/guard/authenticated.guard";
 import { AuthenticationService } from "./authentication.service";
 import { LoginDTO } from "./dto/login.dto";
 import { RegisterDTO } from "./dto/register.dto";
@@ -27,7 +27,6 @@ export class AuthenticationController {
     @UseGuards(AuthenticatedGuard)
     @Get('me')
     getAuthenticatedUser(@Req() request: RequestWithUser) {
-        console.log(request)
         return request.user
     }
 }

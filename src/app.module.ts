@@ -6,6 +6,8 @@ import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
 import * as Joi from 'joi';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { EventModule } from './event/event.module';
+import {TicketModule} from "./ticket/ticket.module";
 
 
 @Module({
@@ -21,7 +23,9 @@ import { AuthenticationModule } from './authentication/authentication.module';
     }),
     DatabaseModule,
     UserModule,
-    AuthenticationModule
+    AuthenticationModule,
+    EventModule,
+    TicketModule
   ],
   controllers: [AppController],
   providers: [AppService],

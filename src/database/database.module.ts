@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { User } from 'src/user/user.entity';
+import { User } from '../user/user.entity';
+import { EventEntity } from '../event/event.entity';
+import {TicketEntity} from "../ticket/ticket.entity";
  
 @Module({
   imports: [
@@ -15,9 +17,10 @@ import { User } from 'src/user/user.entity';
         host: configService.get('POSTGRES_HOST'),
         port: configService.get('POSTGRES_PORT'),
         type: 'postgresql',
-        autoLoadEntities: true,
         entities: [
-            
+            User,
+            EventEntity,
+            TicketEntity
         ],
       }),
     }),

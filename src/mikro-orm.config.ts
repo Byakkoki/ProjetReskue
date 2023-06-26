@@ -1,11 +1,13 @@
 import { Options } from '@mikro-orm/core';
 import { ConfigService } from '@nestjs/config';
+import { EventEntity } from './event/event.entity';
 import { User } from './user/user.entity';
+import {TicketEntity} from "./ticket/ticket.entity";
 
 const configService = new ConfigService();
 
 const MikroOrmConfig: Options = {
-  entities: [User ],
+  entities: [User, EventEntity, TicketEntity],
   type: 'postgresql',
   dbName: configService.get('POSTGRES_DB'),
   user: configService.get('POSTGRES_USER'),
