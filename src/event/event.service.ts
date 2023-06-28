@@ -24,13 +24,13 @@ export class EventService {
     ) { }
 
     findAll() {
-        return this.eventRepository.findAll({populate: ["owner"]})
+        return this.eventRepository.findAll({populate: ["owner", 'tickets']})
     }
 
     async findOneEvent(idEvent: string) {
         const event = await this.eventRepository.findOne({
             id: idEvent
-        }, {populate: ['owner']})
+        }, {populate: ['owner', 'tickets']})
         if(!event) {
             throw new NotFoundException('Event not found')
         }
