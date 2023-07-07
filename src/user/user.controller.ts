@@ -15,7 +15,7 @@ export class UserController {
     ) { }
 
     @ApiOperation({
-        description: `This route update a user`,
+        description: `This route received a user`,
     })
     @ApiResponse({
         status: 200,
